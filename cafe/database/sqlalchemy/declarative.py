@@ -13,11 +13,11 @@ metadata = MetaData(naming_convention={
 
 
 # All base classes inheriting from this will use the same metadata
-CafeBase = declarative_base(metadata=metadata)
+CafeSQLAlchemyBase = declarative_base(metadata=metadata)
 
 
 # ensure str() returns id if an id is present, useful for when id is uuid
-CafeBase.__str__ = lambda self: \
+CafeSQLAlchemyBase.__str__ = lambda self: \
     '{}::{}'.format(self.__class__.__name__, str(self.id)) \
     if hasattr(self, 'id') \
-    else super(CafeBase, self).__str__()
+    else super(CafeSQLAlchemyBase, self).__str__()
