@@ -3,26 +3,34 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import ProgrammingError
 from alembic import command
 from alembic.config import Config
+from sqlparse import parsestream
 
 from os.path import join
 
 log = logging.getLogger(__name__)
 
+# Python 2/3 compatibility
+try:
+    stringtype = unicode
+except NameError:
+    stringtype = str
+
 
 def execute(engine, file_path):
     with open(file_path) as f:
-        for line in f:
-            line = line.strip().rstrip(';')
-            if line and not line.startswith("-"):
+        for parsed_statement in parsestream(f):
+            statement = stringtype(parsed_statement).strip()
+            if statement == '':
+                continue
+            if log is not None:
+                log.info("Running: {statement}".format(statement=statement))
+            try:
+                engine.execute(statement)
+            except ProgrammingError as e:
                 if log is not None:
-                    log.info("Running: {line}".format(line=line))
-                try:
-                    engine.execute(line)
-                except ProgrammingError as e:
-                    if log is not None:
-                        log.warning(e.message)
-                    else:
-                        raise e
+                    log.warning(e.message)
+                else:
+                    raise e
 
 
 class DatabaseManager(object):
