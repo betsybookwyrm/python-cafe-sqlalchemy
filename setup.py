@@ -31,7 +31,7 @@ install_requires = extract_requirements('requirements.txt')
 
 setup(
     name='python-cafe-sqlalchemy',
-    version='0.4.0',
+    version='0.5.0-dev',
     description='Handy SQLAlchemy bits and bobs, as an extension for Cafe',
     long_description=long_description,
     license='APLv2',
