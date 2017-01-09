@@ -30,7 +30,7 @@ with open(path.join(base_dir, 'README.rst')) as f:
 install_requires = extract_requirements('requirements.txt')
 
 setup(
-    name='cafe-sqlalchemy',
+    name='python-cafe-sqlalchemy',
     version='0.3.0-dev',
     description='Handy SQLAlchemy bits and bobs, as an extension for Cafe',
     long_description=long_description,

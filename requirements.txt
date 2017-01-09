@@ -1,4 +1,4 @@
-cafe
+python-cafe
 SQLAlchemy
 alembic
 sqlparse
