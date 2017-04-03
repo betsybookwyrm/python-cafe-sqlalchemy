@@ -47,7 +47,6 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    package_data={
-    },
+    package_data={},
     install_requires=install_requires,
 )
