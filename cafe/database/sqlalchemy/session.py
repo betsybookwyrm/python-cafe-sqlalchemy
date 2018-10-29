@@ -47,9 +47,9 @@ class SQLAlchemySessionManager(SessionManager):
         return sessionmaker(bind=engine, **kwargs)
 
     @classmethod
-    def engine(cls):
+    def engine(cls, *args, **kwargs):
         if cls.ENGINE is None:
-            cls.ENGINE = cls.get_engine()
+            cls.ENGINE = cls.get_engine(*args, **kwargs)
         return cls.ENGINE
 
     @abstractclassmethod
